@@ -1,0 +1,67 @@
+<br><br>
+<div style="text-align: center" color="warn">
+  <h2><b>Inventory Adjustment</b></h2>
+</div>
+
+
+<div class="form-group">
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"> <b>Adjustment Type:</b></span>
+    </div>
+    <mat-form-field>
+      <mat-label></mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option value="overshipment">OverShipment</mat-option>
+        <mat-option value="incorrect">Incorrect Receiving</mat-option>
+        <mat-option value="brakages">Brakages</mat-option>
+        <mat-option value="wastages">Wastages</mat-option>
+        <mat-option value="theft">Theft</mat-option>
+        <mat-option value="loss">Loss</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<button (click)="onselect()"></button>
+
+
+<!-- Table Start -->
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Type To Search">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> <b>Product Code</b> </th>
+
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> <b>Product Name</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> <b>Current Stock </b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> <b>Quantity</b> </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-form-field class="example-full-width">
+        <input matInput value="">
+      </mat-form-field>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>&nbsp;
+
+<div class="example-button-row">
+  <button mat-button (click)="savedata()"><b>Save</b></button>
+  <button mat-button (click)="backpage()"><b>Cancel</b></button>
+</div>
